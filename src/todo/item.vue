@@ -21,7 +21,9 @@
       }
     },
     methods: {
-      delTodo () {}
+      delTodo () {
+        this.$emit('del', this.todo.id)
+      }
     }
   }
 </script>
@@ -35,12 +37,13 @@
         align-items center
     }
     .delete{
-        color crimson
+        color orange
         font-size 30px
         line-height 42px
         cursor pointer
     }
-    .toggle{
+    .toggle:checked+label{
+        text-decoration line-through
     }
     .label{
         margin-left 10px

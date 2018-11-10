@@ -8,14 +8,19 @@
                     placeholder="接下去要做什么？"
                     @keyup.enter="addToDo"
             >
-            <Ttem :todo="todo"></Ttem>
-            <Tabs :filter="filter"></Tabs>
+            <Ttem v-for="todo in filteredTodos"
+                  :key="todo.id"
+                  :todo="todo"
+                  @del="delTodo"
+            />
+            <Tabs :filter="filter" :todos="todos" @toggle="toggleFilter" @clearAll="clearAllCompleted"/>
         </div>
     </section>
 </template>
 <script>
     import Ttem from './item.vue'
     import Tabs from './tabs.vue'
+    let id = 0
     export default {
       components: {
         Ttem,
@@ -23,24 +28,43 @@
       },
       data () {
         return {
-          todo: {
-            id: 1,
-            content: 'todo item',
-            completed: true
-          },
+          todos: [],
           filter: 'all'
         }
       },
+      computed: {
+        filteredTodos () {
+          if (this.filter === 'all') {
+            return this.todos
+          }
+          const completed = this.filter === 'completed'
+          return this.todos.filter(todo => completed === todo.completed)
+        }
+      },
       methods: {
-        addToDo () {}
+        addToDo (e) {
+          this.todos.unshift({
+            id: id++,
+            content: e.target.value.trim(),
+            completed: false
+          })
+          e.target.value = ''
+        },
+        delTodo (id) {
+          this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+        },
+        toggleFilter (state) {
+          this.filter = state
+        },
+        clearAllCompleted () {
+          this.todos = this.todos.filter(todo => !todo.completed)
+        }
       }
     }
 </script>
 <style lang="stylus" scoped>
     .real-app{
         width 100%
-        position absolute
-        z-index 100
     }
     .real-app>div{
         background #fff

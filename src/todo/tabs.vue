@@ -1,12 +1,12 @@
 <template>
     <div class="helper">
-        <span class="left">2 items left</span>
+        <span class="left">{{unFinishedTodoLength}} items left</span>
         <span class="tabs">
-            <span v-for="state in states" :key="state" :class="['state', filter === state ? 'active' : '']" @click="toggleFilter(state)">
+            <span v-for="state in states" :key="state" :class="[state, filter === state ? 'actived' : '']" @click="toggleFilter(state)">
                 {{state}}
             </span>
         </span>
-        <span class="clear" @clcik="clearAllCompleted">clear completed</span>
+        <span class="clear" @click="clearAllCompleted">clear completed</span>
     </div>
 </template>
 <script>
@@ -14,6 +14,10 @@
       props: {
         filter: {
           type: String,
+          required: true
+        },
+        todos: {
+          type: Array,
           required: true
         }
       },
@@ -26,9 +30,18 @@
           ]
         }
       },
+      computed: {
+        unFinishedTodoLength () {
+          return this.todos.filter(todo => !todo.completed).length
+        }
+      },
       methods: {
-        toggleFilter (state) {},
-        clearAllCompleted () {}
+        toggleFilter (state) {
+          this.$emit('toggle', state)
+        },
+        clearAllCompleted () {
+          this.$emit('clearAll')
+        }
       }
     }
 </script>
@@ -45,16 +58,19 @@
         display flex
         justify-content center
     }
-    .state{
+    .tabs>span{
         padding 5px
         border 2px solid transparent
         border-radius 10px
         cursor pointer
     }
-    .state.active{
+    .tabs>span.actived{
         border-color orange
     }
-    .state:nth-child(2){
+    .tabs>span:nth-child(2){
         margin 0 5px
+    }
+    .clear{
+        cursor pointer
     }
 </style>
