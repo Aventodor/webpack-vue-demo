@@ -1,5 +1,5 @@
 <template>
-    <div :class="['todo-item', todo.completed ? 'completed' : '']">
+    <div :class="['views-item', todo.completed ? 'completed' : '']">
         <input
                 :id="todo.id"
                 type="checkbox"
