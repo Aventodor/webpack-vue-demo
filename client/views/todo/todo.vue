@@ -6,8 +6,7 @@
                     class="add-input"
                     autofocus
                     placeholder="接下去要做什么？"
-                    @keyup.enter="addToDo"
-            >
+                    @keyup.enter="addToDo">
             <Ttem v-for="todo in filteredTodos"
                   :key="todo.id"
                   :todo="todo"

@@ -7,20 +7,20 @@
     </div>
 </template>
 <script>
-    import Header from './layout/header.vue'
-    import Footer from './layout/footer.jsx'
-    import ToDo from './views/todo/todo.vue'
-    export default {
-      components: {
-        Header,
-        Footer,
-        ToDo
-      },
-      data () {
-        return {
-        }
-      }
+import Header from './layout/header.vue'
+import Footer from './layout/footer.jsx'
+import ToDo from './views/todo/todo.vue'
+export default {
+  components: {
+    Header,
+    Footer,
+    ToDo
+  },
+  data () {
+    return {
     }
+  }
+}
 </script>
 <style lang="stylus" scoped>
     #app{
