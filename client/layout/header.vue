@@ -4,7 +4,7 @@
     </header>
 </template>
 <script></script>
-<style lang="stylus">
+<style lang="stylus" scoped>
     .main-header{
         color red
         text-align center

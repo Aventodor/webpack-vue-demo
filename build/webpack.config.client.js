@@ -4,14 +4,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const ExtractPlugin = require('extract-text-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const baseConfig = require('./webpack.config.base')
 
 const isDev = process.env.NODE_ENV === 'development'
 
 const defaultPlugins = [
-  new CleanWebpackPlugin(['dist']),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: isDev ? '"development"' : '"production"'
@@ -40,7 +38,7 @@ if (isDev) {
         {
           test: /\.styl$/,
           use: [
-            'style-loader',
+            'vue-style-loader',
             'css-loader',
             {
               loader: "postcss-loader",
@@ -81,7 +79,7 @@ if (isDev) {
         {
           test: /\.styl$/,
           use: ExtractPlugin.extract({
-            fallback: 'style-loader',
+            fallback: 'vue-style-loader',
             use: [
               'css-loader',
               {
