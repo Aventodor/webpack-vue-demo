@@ -16,22 +16,22 @@ const config = {
     rules: [
       {
         test: /\.(vue|js|jsx)$/,
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         exclude: /node_modules/,
-        enforce: "pre"
+        enforce: 'pre'
       },
       {
         test: /\.vue$/,
-        loader: "vue-loader",
+        loader: 'vue-loader',
         options: createVueLoaderOptions(isDev)
       },
       {
         test: /\.jsx$/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
       },
       {
         test: /\.js$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -56,6 +56,5 @@ const config = {
     ]
   }
 }
-
 
 module.exports = config
