@@ -6,7 +6,6 @@ const merge = require('webpack-merge')
 
 const baseConfig = require('./webpack.config.base')
 
-
 const defaultPlugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -53,7 +52,7 @@ config = merge(baseConfig, {
           //   }
           // },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               sourceMap: true
             }
