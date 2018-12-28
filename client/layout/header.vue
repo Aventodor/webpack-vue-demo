@@ -1,10 +1,10 @@
 <template>
-    <header class="main-header">
+    <!--<header class="main-header">-->
+    <header :class="$style.mainHeader">
         <h1>TODO</h1>
     </header>
 </template>
-<script></script>
-<style lang="stylus">
+<style lang="stylus" module>
     .main-header{
         color red
         text-align center

@@ -4,20 +4,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const ExtractPlugin = require('extract-text-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 
 const baseConfig = require('./webpack.config.base')
 
 const isDev = process.env.NODE_ENV === 'development'
 
 const defaultPlugins = [
-  new CleanWebpackPlugin(['dist']),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: isDev ? '"development"' : '"production"'
     }
   }),
-  new HtmlWebpackPlugin()
+  new HtmlWebpackPlugin({
+    template: path.join(__dirname, 'template.html')
+  }),
+  new VueClientPlugin()
 ]
 
 const devServer = {
@@ -25,6 +28,9 @@ const devServer = {
   host: '0.0.0.0',
   overlay: {
     errors: true
+  },
+  historyApiFallback: {
+    index: '/index.html'
   },
   hot: true
 }
@@ -40,10 +46,17 @@ if (isDev) {
         {
           test: /\.styl$/,
           use: [
-            'style-loader',
+            'vue-style-loader',
             'css-loader',
+            // {
+            //   loader: 'css-loader',
+            //   options: {
+            //     module: true,
+            //     localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
+            //   }
+            // },
             {
-              loader: "postcss-loader",
+              loader: 'postcss-loader',
               options: {
                 sourceMap: true
               }
@@ -81,11 +94,11 @@ if (isDev) {
         {
           test: /\.styl$/,
           use: ExtractPlugin.extract({
-            fallback: 'style-loader',
+            fallback: 'vue-style-loader',
             use: [
               'css-loader',
               {
-                loader: "postcss-loader",
+                loader: 'postcss-loader',
                 options: {
                   sourceMap: true
                 }

@@ -1,7 +1,9 @@
 const path = require('path')
 
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const CleanWebpackPlugin = require('clean-webpack-plugin')
+const createVueLoaderOptions = require('./vue-loader.config')
 
+const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
   target: 'web',
@@ -13,16 +15,23 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(vue|js|jsx)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        enforce: 'pre'
+      },
+      {
         test: /\.vue$/,
-        loader: "vue-loader"
+        loader: 'vue-loader',
+        options: createVueLoaderOptions(isDev)
       },
       {
         test: /\.jsx$/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
       },
       {
         test: /\.js$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -45,11 +54,7 @@ const config = {
         ]
       }
     ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(['dist'])
-  ]
+  }
 }
-
 
 module.exports = config
