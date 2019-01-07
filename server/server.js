@@ -4,11 +4,12 @@ const app = new Koa()
 
 const isDev = process.env.NODE_ENV === 'development'
 
-const pageRouter = require('./routes/dev-ssr')
+const pageRouter = require('./routers/dev-ssr')
 
 app.use(async (ctx, next) => {
   try {
     console.log(`request width path ${ctx.path}`)
+    await next()
   } catch (e) {
     console.log(e)
     ctx.status = 500
