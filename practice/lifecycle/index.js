@@ -38,13 +38,13 @@ const app = new Vue({
     console.log(this, 'destroyed')
   },
   render (h) {
-    throw TypeError('render error')
-    // console.log('render function invoked')
-    // return h('div', {}, this.text)
+    // throw TypeError('render error')
+    console.log('render function invoked')
+    return h('div', {}, this.text)
   },
-  renderError (h, err) {
-    return h('div', {}, err.stack)
-  },
+  // renderError (h, err) {
+  //   return h('div', {}, err.stack)
+  // },
   errorCaptured () {
     // 会向上冒泡，正式环境可用
   }
@@ -54,6 +54,6 @@ app.$mount('#root')
 //   app.text += 1
 // }, 1000)
 
-// setTimeout(() => {
-//   app.$destroy()
-// }, 1000)
+setTimeout(() => {
+  app.$destroy()
+}, 1000)

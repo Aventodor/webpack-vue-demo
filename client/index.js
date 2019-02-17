@@ -14,6 +14,7 @@ Vue.use(VueRouter)
 const router = createRouter()
 const store = createStore()
 
+// vuex 注册模块
 store.registerModule('c', {
   state: {
     text: 3

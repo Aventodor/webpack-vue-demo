@@ -18,12 +18,12 @@ app.$mount('#root')
 
 // let i = 0
 setInterval(() => {
+  app.text++
+  // app.text++
+  // app.text++
+  // app.text++
+  // app.text++
   // i++
-  app.text++
-  app.text++
-  app.text++
-  app.text++
-  app.text++
   // app.obj.a = i
   // app.$set(app.obj, 'a', i)
   // app.$forceUpdate()

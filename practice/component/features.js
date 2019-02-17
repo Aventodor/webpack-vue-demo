@@ -7,6 +7,7 @@ const ChildComponent = {
   `,
   mounted () {
     console.log(this.yeye)
+    console.log(this.$parent.$options.name)
   }
 }
 

@@ -53,7 +53,7 @@
       // ...mapMutations(['updateCount', 'a/updateText'])
     },
     mounted () {
-      console.log(this.$store)
+      // console.log(this.$store)
       this.updateCountAsync({
         num: 5,
         time: 2000
